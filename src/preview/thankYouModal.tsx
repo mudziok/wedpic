@@ -4,12 +4,14 @@ import { ButtonWithIcon } from "../utility/buttonWithIcon";
 import { iconCamera } from "../utility/icons";
 
 interface thankYouModalProps {
-  onExit: () => void
+  onExit: () => void,
+  onClickOut?: () => void
 }
 
-export const ThankYouModal:FC<thankYouModalProps> = ({onExit}) => {
+export const ThankYouModal:FC<thankYouModalProps> = ({onExit, onClickOut}) => {
   return (
-    <Modal>
+    <Modal
+      onClickOut={onClickOut}>
       <div className='flex flex-col justify-center items-center'>
         <span className="text-xl p-2">Dziękujemy za wysłanie zdjęcia!</span>
         <ButtonWithIcon
