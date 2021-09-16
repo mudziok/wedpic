@@ -1,14 +1,14 @@
 import { FC } from "react"
-import { ButtonWithIcon } from "./buttonWithIcon"
+import { ButtonWithIcon } from "../utility/buttonWithIcon"
 import { iconUpload, iconCamera, iconSwitch } from "./overlayIcons"
 
-interface OverlayProps {
+interface cameraOverlayProps {
   onSwitchFacing: () => void,
   onCapturePhoto: () => void,
   onUploadPhoto: () => void
 }
 
-export const CameraOverlay:FC<OverlayProps> = (props) => {
+export const CameraOverlay:FC<cameraOverlayProps> = (props) => {
   return (
     <div className="w-full h-full flex flex-col-reverse text-white">
       <div className="w-full flex justify-around">
