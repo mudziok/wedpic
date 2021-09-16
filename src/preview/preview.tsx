@@ -38,7 +38,7 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
       {imgUrl &&
         <img src={imgUrl} alt="Preview" className="w-full"/>
       }
-      <div className="fixed top-0 left-0 w-screen h-screen">
+      <div className="fixed top-0 left-0 w-screen h-full">
         <PreviewOverlay
           onExit={onExit}
           onUpload={() => uploadImg(photo)}
@@ -48,9 +48,7 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
         <UploadModal />
       }
       { upState === uploadState.THANK_YOU &&
-        <ThankYouModal
-          onExit={onExit}
-        />
+        <ThankYouModal onExit={onExit} />
       }
     </div>
   )

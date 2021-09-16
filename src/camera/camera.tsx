@@ -4,10 +4,11 @@ import { CameraOverlay } from "./cameraOverlay";
 import { urlToFile } from "../utility/urlToFile";
 
 interface cameraProps {
-  onFileSelected: (f: File) => void
+  onFileSelected: (f: File) => void,
+  onUserMedia: () => void
 }
 
-export const Camera:FC<cameraProps> = ({onFileSelected}) => {
+export const Camera:FC<cameraProps> = ({onFileSelected, onUserMedia}) => {
   const webcamRef = useRef<Webcam>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isFrontFacing, setIsFrontFacing] = useState(true);
@@ -45,9 +46,10 @@ export const Camera:FC<cameraProps> = ({onFileSelected}) => {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         mirrored={isFrontFacing}
+        onUserMedia={onUserMedia}
         videoConstraints={{facingMode: isFrontFacing ? "user" : { exact: "environment" }}}
       />
-      <div className="fixed top-0 left-0 w-screen h-screen">
+      <div className="fixed top-0 left-0 w-screen h-fix">
         <input className="hidden"
           type="file" ref={fileInputRef}
           accept="image/png, image/jpg, image/jpeg, .heic"
