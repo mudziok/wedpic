@@ -10,10 +10,10 @@ interface cameraProps {
 export const Camera:FC<cameraProps> = ({onFileSelected}) => {
   const webcamRef = useRef<Webcam>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isFrontFacing, setFrontFacing] = useState(true);
+  const [isFrontFacing, setIsFrontFacing] = useState(true);
 
   const flipFacingMode = () => {
-    setFrontFacing(!isFrontFacing);
+    setIsFrontFacing(!isFrontFacing);
   }
 
   const capture = useCallback(async () => {
