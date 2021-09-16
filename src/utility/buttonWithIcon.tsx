@@ -2,17 +2,18 @@ import { FC } from "react"
 import { motion } from 'framer-motion';
 
 interface buttonWithIconProps {
-  icon: JSX.Element
+  icon?: JSX.Element
+  text?: String
   onClick?: () => void
 }
 
-export const ButtonWithIcon:FC<buttonWithIconProps> = (props) => {
+export const ButtonWithIcon:FC<buttonWithIconProps> = ({icon, text, onClick}) => {
   return (
-    <motion.button className="p-2 m-2"
+    <motion.button className="p-2 m-2 flex flex-col justify-center items-center"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      onClick={props.onClick}>
-      {props.icon}
+      onClick={onClick}>
+      {icon} {text}
     </motion.button>
   )
 }
