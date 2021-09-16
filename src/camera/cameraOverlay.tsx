@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { ButtonWithIcon } from "../utility/buttonWithIcon"
-import { iconUpload, iconCamera, iconSwitch } from "./overlayIcons"
+import { iconUpload, iconCamera, iconSwitch } from "../utility/icons"
 
 interface cameraOverlayProps {
   onSwitchFacing: () => void,
