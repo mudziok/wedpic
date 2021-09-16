@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import './App.css';
 import { Camera } from './camera/camera';
+import { Preview } from './preview/preview';
 
 const App:FC = () => {
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -9,14 +10,15 @@ const App:FC = () => {
 
   const processFile = (f: File) => {
     setImgFile(f)
-    console.log(imgFile, f)
+    setIsTakingPhoto(false)
   }
 
   return (
     <div className="w-screen h-screen bg-black">
-      <Camera
-        onFileSelected={processFile}
-      />
+      { isTakingPhoto
+        ? <Camera onFileSelected={processFile} />
+        : <Preview photo={imgFile} onExit={() => {setIsTakingPhoto(true)}}/>
+      }
     </div>
   );
 }
