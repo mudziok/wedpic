@@ -33,7 +33,7 @@ export const Camera:FC<cameraProps> = ({onFileSelected, onUserMedia}) => {
     }
   }
 
-  const uploadLocal = (event: ChangeEvent<HTMLInputElement>) => {
+  const uploadLocal = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
       const screenFile = event.currentTarget.files[0]
       onFileSelected(screenFile);

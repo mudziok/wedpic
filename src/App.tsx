@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import './App.css';
 import { Camera } from './camera/camera';
 import { Preview } from './preview/preview';
+import imageCompression from 'browser-image-compression';
 
 const App:FC = () => {
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -17,9 +18,20 @@ const App:FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [])
 
-  const processFile = (f: File) => {
-    setImgFile(f)
-    setIsTakingPhoto(false)
+  const processFile = async (f: File) => {
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true
+    }
+
+    try {
+      const compressedImg = await imageCompression(f, options)
+      setImgFile(compressedImg)
+      setIsTakingPhoto(false)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
