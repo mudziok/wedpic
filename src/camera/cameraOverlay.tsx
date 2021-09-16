@@ -8,7 +8,7 @@ interface OverlayProps {
   onUploadPhoto: () => void
 }
 
-export const Overlay:FC<OverlayProps> = (props) => {
+export const CameraOverlay:FC<OverlayProps> = (props) => {
   return (
     <div className="w-full h-full flex flex-col-reverse text-white">
       <div className="w-full flex justify-around">

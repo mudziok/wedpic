@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback, ChangeEvent, FC } from "react";
 import Webcam from "react-webcam";
-import { Overlay } from "./overlay";
+import { CameraOverlay } from "./cameraOverlay";
 import { urlToFile } from "../utility/urlToFile";
 
 interface cameraProps {
@@ -53,7 +53,7 @@ export const Camera:FC<cameraProps> = ({onFileSelected}) => {
           accept="image/png, image/jpg, image/jpeg, .heic"
           onChange={uploadLocal}
         />
-        <Overlay
+        <CameraOverlay
           onSwitchFacing={flipFacingMode}
           onCapturePhoto={capture}
           onUploadPhoto={openFileSelector}
