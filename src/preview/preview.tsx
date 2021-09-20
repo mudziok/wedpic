@@ -48,7 +48,7 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
         <UploadModal />
       }
       { upState === uploadState.THANK_YOU &&
-        <ThankYouModal onExit={onExit} />
+        <ThankYouModal onExit={onExit} onClickOut={onExit}/>
       }
     </div>
   )

@@ -17,7 +17,7 @@ export const PreviewOverlay:FC<previewOverlayInterface> = ({onExit, onUpload}) =
           onClick={onUpload}
         />
         </div>
-        <div className="w-full flex justify-start mb-auto">
+        <div className="w-full flex justify-end mb-auto">
           <ButtonWithIcon 
             icon={exitIcon}
             onClick={onExit}
