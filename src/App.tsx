@@ -20,13 +20,16 @@ const App:FC = () => {
 
   const processFile = async (f: File) => {
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 0.5,
       maxWidthOrHeight: 1920,
-      useWebWorker: true
+      useWebWorker: true,
+      fileType: "png"
     }
 
     try {
       const compressedImg = await imageCompression(f, options)
+      console.log(compressedImg)
+      console.log(window.location.pathname)
       setImgFile(compressedImg)
       setIsTakingPhoto(false)
     } catch (err) {

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { FC, useEffect, useState } from 'react';
 import { PreviewOverlay } from './previewOverlay';
 import { ThankYouModal } from './thankYouModal';
@@ -28,9 +29,29 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
     }
   }, [photo])
 
-  const uploadImg = (f: File | null) => {
+  const uploadImg = async (photo: File | null, album: String) => {
     setUpState(uploadState.UPLOAD)
-    setTimeout(()=>{setUpState(uploadState.THANK_YOU)}, 1000)
+
+    try {
+      const getUrlResponse = await axios({
+        method: "GET",
+        params: {
+          "album": album
+        },
+        url: "https://ig8lbj6eod.execute-api.eu-central-1.amazonaws.com/default/album-lambda"
+      })
+
+      const uploadURL = getUrlResponse.data.uploadURL;
+
+      const result = await fetch(uploadURL, {
+        method: 'PUT',
+        body: photo
+      })
+
+      console.log(result)
+    } finally {
+      setUpState(uploadState.THANK_YOU)
+    }
   }
 
   return (
@@ -41,7 +62,7 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
       <div className="fixed top-0 left-0 w-screen h-full">
         <PreviewOverlay
           onExit={onExit}
-          onUpload={() => uploadImg(photo)}
+          onUpload={() => uploadImg(photo, window.location.pathname.substring(1))}
         />
       </div>
       { upState === uploadState.UPLOAD &&

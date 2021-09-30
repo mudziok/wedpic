@@ -52,7 +52,7 @@ export const Camera:FC<cameraProps> = ({onFileSelected, onUserMedia}) => {
       <div className="fixed top-0 left-0 w-screen h-fix">
         <input className="hidden"
           type="file" ref={fileInputRef}
-          accept="image/png, image/jpg, image/jpeg, .heic"
+          accept="image/*"
           onChange={uploadLocal}
         />
         <CameraOverlay
