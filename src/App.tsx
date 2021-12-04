@@ -28,8 +28,6 @@ const App:FC = () => {
 
     try {
       const compressedImg = await imageCompression(f, options)
-      console.log(compressedImg)
-      console.log(window.location.pathname)
       setImgFile(compressedImg)
       setIsTakingPhoto(false)
     } catch (err) {
@@ -41,7 +39,7 @@ const App:FC = () => {
     <div className="fixed top-0 left-0 w-screen h-fix bg-black" >
       { isTakingPhoto
         ? <Camera onFileSelected={processFile} onUserMedia={handleResize}/>
-        : <Preview photo={imgFile} onExit={() => {setIsTakingPhoto(true)}}/>
+        : <Preview photo={imgFile!} onExit={() => {setIsTakingPhoto(true)}}/>
       }
     </div>
   );

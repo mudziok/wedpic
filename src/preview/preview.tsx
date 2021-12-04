@@ -5,7 +5,7 @@ import { ThankYouModal } from './thankYouModal';
 import { UploadModal } from './uploadModal';
 
 interface previewProps {
-  photo: File | null,
+  photo: File,
   onExit: () => void
 }
 
@@ -29,7 +29,7 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
     }
   }, [photo])
 
-  const uploadImg = async (photo: File | null, album: String) => {
+  const uploadImg = async (photo: File, album: String) => {
     setUpState(uploadState.UPLOAD)
 
     try {
@@ -47,8 +47,6 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
         method: 'PUT',
         body: photo
       })
-
-      console.log(result)
     } finally {
       setUpState(uploadState.THANK_YOU)
     }
