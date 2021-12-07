@@ -1,0 +1,17 @@
+{
+  "name": "get-upload-url",
+  "version": "1.0.0",
+  "scripts": {
+    "rebuild": "(if exist dist rmdir /Q /S dist) && tsc && copy package.json dist\\package.json && (cd dist && yarn install --production)",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.815.0",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.85",
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  }
+}

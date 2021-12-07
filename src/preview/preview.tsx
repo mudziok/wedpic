@@ -33,20 +33,24 @@ export const Preview:FC<previewProps> = ({photo, onExit}) => {
     setUpState(uploadState.UPLOAD)
 
     try {
-      const getUrlResponse = await axios({
-        method: "GET",
-        params: {
-          "album": album
-        },
-        url: "https://ig8lbj6eod.execute-api.eu-central-1.amazonaws.com/default/album-lambda"
-      })
+      const urlResponse = await axios.get(
+        "https://ig8lbj6eod.execute-api.eu-central-1.amazonaws.com/default/album-lambda", {
+          params: { "album": album }
+        }
+      )
 
-      const uploadURL = getUrlResponse.data.uploadURL;
+      const uploadURL = urlResponse.data.url;
+      const uploadHeaders = urlResponse.data.fields;
+      
+      let formData = new FormData();
+      Object.keys(uploadHeaders).forEach(key => {
+        formData.append(key, uploadHeaders[key]);
+      });
+      formData.append("file", photo);
 
-      const result = await fetch(uploadURL, {
-        method: 'PUT',
-        body: photo
-      })
+      await axios.post(uploadURL, formData);
+    } catch(e) {
+      console.error(e);
     } finally {
       setUpState(uploadState.THANK_YOU)
     }
